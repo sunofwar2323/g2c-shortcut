@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bhutan G2C Smart Services — Your guide to all 56 government services">
+  <title>Bhutan G2C Smart Services</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Step 1: Onboarding Gate -->
+  <section id="onboarding" class="onboarding" aria-label="Welcome and registration">
+    <div class="onboarding-card">
+      <header class="onboarding-header">
+        <div class="logo-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/>
+          </svg>
+        </div>
+        <div class="header-text">
+          <h1>Bhutan G2C Smart Services</h1>
+          <p>Your guide to all government services</p>
+        </div>
+      </header>
+
+      <div class="onboarding-body">
+        <p class="onboarding-intro">
+          Tell us a little about yourself to personalise your experience and access all 56 government services.
+        </p>
+
+        <form id="onboarding-form" novalidate>
+          <div class="form-group">
+            <label for="full-name">Full name</label>
+            <input type="text" id="full-name" name="name" placeholder="Tenzin Wangchuk" required autocomplete="name">
+            <span class="field-error" id="name-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="tenzin@example.bt" required autocomplete="email">
+            <span class="field-error" id="email-error"></span>
+          </div>
+
+          <fieldset class="survey-section">
+            <legend>Quick questions</legend>
+
+            <div class="survey-question">
+              <p>Would you like a YouTube channel that teaches how to file each government service step by step?</p>
+              <div class="toggle-group" role="group" aria-label="YouTube channel interest">
+                <button type="button" class="toggle-btn active" data-field="youtube" data-value="yes">
+                  <span class="check" aria-hidden="true">✓</span> Yes, definitely!
+                </button>
+                <button type="button" class="toggle-btn" data-field="youtube" data-value="no">No thanks</button>
+              </div>
+            </div>
+
+            <div class="survey-question">
+              <p>Do you follow AI with GS?</p>
+              <div class="toggle-group" role="group" aria-label="Follows AI with GS">
+                <button type="button" class="toggle-btn active" data-field="ai-gs" data-value="yes">
+                  <span class="check" aria-hidden="true">✓</span> Yes, I do
+                </button>
+                <button type="button" class="toggle-btn" data-field="ai-gs" data-value="no">Not yet</button>
+              </div>
+            </div>
+          </fieldset>
+
+          <button type="submit" class="cta-btn" id="get-started-btn">
+            <span class="cta-arrow" aria-hidden="true">→</span> Get started — explore services
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step 2: Services Dashboard -->
+  <div id="dashboard" class="dashboard hidden" aria-hidden="true">
+    <nav class="top-nav" aria-label="Main navigation">
+      <div class="nav-brand">
+        <div class="logo-icon small" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/>
+          </svg>
+        </div>
+        <span class="nav-title">G2C Smart Services</span>
+      </div>
+      <div class="nav-welcome">
+        <span id="welcome-text">Welcome, Guest</span>
+        <button type="button" class="search-icon-btn" id="nav-search-btn" aria-label="Focus search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <main class="dashboard-main">
+      <section class="hero" aria-label="Search services">
+        <h2 class="hero-greeting" id="hero-greeting">Welcome back!</h2>
+        <p class="hero-sub">Search across all 56 government services by name, category, or agency.</p>
+        <div class="search-wrapper">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/>
+          </svg>
+          <input type="search" id="search-input" placeholder="Search services, categories, agencies…" autocomplete="off" aria-label="Search services">
+          <button type="button" class="search-clear hidden" id="search-clear" aria-label="Clear search">×</button>
+        </div>
+      </section>
+
+      <section class="filters" aria-label="Category filters">
+        <div class="filter-chips" id="filter-chips" role="group" aria-label="Filter by category"></div>
+      </section>
+
+      <section class="top-services" id="top-services-section" aria-label="Top 20 most used services">
+        <div class="section-header">
+          <h2>Top 20 Most Used Services</h2>
+          <span class="section-badge">Popular</span>
+        </div>
+        <div class="top-services-grid" id="top-services-grid"></div>
+      </section>
+
+      <section class="all-services" aria-label="All services">
+        <div class="section-header">
+          <h2>All Services</h2>
+          <span class="results-count" id="results-count">56 results</span>
+        </div>
+        <div class="services-grid" id="services-grid"></div>
+        <div class="empty-state hidden" id="empty-state">
+          <div class="empty-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="28" cy="28" r="16"/><path d="M44 44l12 12"/>
+              <path d="M20 28h16M28 20v16"/>
+            </svg>
+          </div>
+          <h3>No services found</h3>
+          <p>Try adjusting your search or clearing the category filter.</p>
+          <button type="button" class="reset-btn" id="reset-filters">Clear all filters</button>
+        </div>
+      </section>
+    </main>
+
+    <button type="button" class="export-btn" id="export-btn" aria-label="Export filtered results as JSON">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M12 3v12M8 11l4 4 4-4M4 21h16"/>
+      </svg>
+      Export JSON
+    </button>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

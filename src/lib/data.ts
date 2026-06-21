@@ -143,7 +143,7 @@ export const STATS = [
   { label: "Most Used Services", value: 20, suffix: "" },
   { label: "Free Access", value: 100, suffix: "%" },
   { label: "Step-by-Step Guides", value: 56, suffix: "" },
-  { label: "AI Powered Search", value: 1, suffix: "", text: "Yes" },
+  // { label: "AI Powered Search", value: 1, suffix: "", text: "Yes" },
   { label: "Citizen Friendly", value: 1, suffix: "", text: "Yes" },
 ];
 

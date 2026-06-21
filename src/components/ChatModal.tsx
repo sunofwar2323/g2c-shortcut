@@ -60,7 +60,7 @@ export function ChatModal({ open, onClose, initialQuery }: ChatModalProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-end justify-center bg-slate-900/50 p-4 backdrop-blur-sm sm:items-center"
+          className="fixed inset-0 z-50 flex items-end justify-center bg-slate-900/50 backdrop-blur-sm sm:items-center sm:p-4"
           onClick={onClose}
         >
           <motion.div
@@ -68,11 +68,11 @@ export function ChatModal({ open, onClose, initialQuery }: ChatModalProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.95 }}
             onClick={(e) => e.stopPropagation()}
-            className="flex h-[min(600px,85vh)] w-full max-w-lg flex-col overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-slate-900"
+            className="safe-bottom flex h-[min(600px,92dvh)] w-full max-w-lg flex-col overflow-hidden rounded-t-2xl bg-white shadow-2xl sm:h-[min(600px,85vh)] sm:rounded-2xl dark:bg-slate-900"
             role="dialog"
             aria-label="AI Chat Assistant"
           >
-            <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4 dark:border-slate-700">
+            <div className="flex items-center justify-between border-b border-slate-200 px-4 py-3 sm:px-5 sm:py-4 dark:border-slate-700">
               <div className="flex items-center gap-3">
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-bhutan-blue to-bhutan-teal text-white">
                   <Bot className="h-4 w-4" strokeWidth={1.75} />
@@ -92,7 +92,7 @@ export function ChatModal({ open, onClose, initialQuery }: ChatModalProps) {
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-5 space-y-4">
+            <div className="flex-1 space-y-4 overflow-y-auto p-4 sm:p-5">
               {messages.map((msg, i) => (
                 <div key={i} className={`flex gap-3 ${msg.role === "user" ? "justify-end" : ""}`}>
                   {msg.role === "ai" && (
@@ -101,7 +101,7 @@ export function ChatModal({ open, onClose, initialQuery }: ChatModalProps) {
                     </div>
                   )}
                   <div
-                    className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed whitespace-pre-line ${
+                    className={`max-w-[88%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-line sm:max-w-[85%] sm:px-4 ${
                       msg.role === "user"
                         ? "bg-bhutan-blue text-white"
                         : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200"
@@ -136,7 +136,7 @@ export function ChatModal({ open, onClose, initialQuery }: ChatModalProps) {
                 e.preventDefault();
                 handleSend();
               }}
-              className="border-t border-slate-200 p-4 dark:border-slate-700"
+              className="safe-bottom border-t border-slate-200 p-3 sm:p-4 dark:border-slate-700"
             >
               <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 dark:border-slate-700 dark:bg-slate-800">
                 <input

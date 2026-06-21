@@ -16,13 +16,13 @@ export function RecentlyViewed({ recentIds, onView }: RecentlyViewedProps) {
   if (services.length === 0) return null;
 
   return (
-    <section className="px-4 py-8 sm:px-6 lg:px-8">
+    <section className="px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="mb-4 flex items-center gap-2">
           <Clock className="h-4 w-4 text-slate-400" strokeWidth={1.75} />
           <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Recently Viewed</h2>
         </div>
-        <div className="flex gap-3 overflow-x-auto pb-2">
+        <div className="hide-scrollbar -mx-4 flex gap-3 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0">
           {services.map((service) => {
             const Icon = getServiceIcon(service);
             return (
@@ -49,13 +49,13 @@ export function PopularTrends({ onView }: { onView: (service: Service) => void }
   const topServices = getTopServices().slice(0, 6);
 
   return (
-    <section className="px-4 py-8 sm:px-6 lg:px-8">
+    <section className="px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="mb-4 flex items-center gap-2">
           <TrendingUp className="h-4 w-4 text-bhutan-teal" strokeWidth={1.75} />
           <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Popular Services Trending</h2>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {topServices.map((service, i) => (
             <motion.button
               key={service.id}

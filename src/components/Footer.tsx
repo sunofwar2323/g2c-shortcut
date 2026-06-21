@@ -5,7 +5,7 @@ import { Building2 } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="border-t border-slate-200 bg-slate-50 px-4 py-12 dark:border-slate-800 dark:bg-slate-900/50 sm:px-6 lg:px-8">
+    <footer className="safe-bottom border-t border-slate-200 bg-slate-50 px-4 py-10 pb-24 dark:border-slate-800 dark:bg-slate-900/50 sm:px-6 sm:py-12 sm:pb-12 lg:px-8 md:pb-12">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col items-center text-center">
           <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-bhutan-blue to-bhutan-teal text-white">

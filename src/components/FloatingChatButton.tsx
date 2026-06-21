@@ -16,7 +16,7 @@ export function FloatingChatButton({ onClick }: FloatingChatButtonProps) {
       animate={{ scale: 1 }}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className="fixed bottom-20 right-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-bhutan-blue to-bhutan-teal text-white shadow-lg shadow-bhutan-blue/30 sm:bottom-6 sm:right-6"
+      className="safe-bottom fixed bottom-[4.75rem] right-4 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-bhutan-blue to-bhutan-teal text-white shadow-lg shadow-bhutan-blue/30 sm:bottom-6 sm:right-6 sm:h-14 sm:w-14 md:bottom-6"
       aria-label="Open AI chat assistant"
     >
       <MessageCircle className="h-6 w-6" strokeWidth={1.75} />

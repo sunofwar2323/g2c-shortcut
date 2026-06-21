@@ -14,14 +14,46 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
-    @apply bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
+    @apply overflow-x-hidden bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
   }
 
   ::selection {
     @apply bg-bhutan-blue/20 text-bhutan-blue-dark;
+  }
+}
+
+@layer utilities {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  .touch-target {
+    @apply min-h-11 min-w-11;
+  }
+
+  .section-padding {
+    @apply px-4 py-12 sm:px-6 sm:py-16 lg:px-8;
+  }
+
+  .section-title {
+    @apply text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-4xl dark:text-white;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }
 

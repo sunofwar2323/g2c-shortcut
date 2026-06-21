@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Search, SlidersHorizontal, X } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ServiceCard } from "@/components/MostUsedServices";
 import { CATEGORIES, CATEGORY_SHORT_LABELS, filterServices } from "@/lib/data";
 import { cn } from "@/lib/utils";
@@ -12,11 +12,30 @@ interface ServiceSearchFilterProps {
   isBookmarked: (id: number) => boolean;
   onBookmark: (id: number) => void;
   onView: (service: Service) => void;
+  externalQuery?: string;
+  onQueryChange?: (query: string) => void;
 }
 
-export function ServiceSearchFilter({ isBookmarked, onBookmark, onView }: ServiceSearchFilterProps) {
-  const [query, setQuery] = useState("");
+export function ServiceSearchFilter({
+  isBookmarked,
+  onBookmark,
+  onView,
+  externalQuery,
+  onQueryChange,
+}: ServiceSearchFilterProps) {
+  const [query, setQuery] = useState(externalQuery ?? "");
   const [activeCategory, setActiveCategory] = useState("all");
+
+  useEffect(() => {
+    if (externalQuery !== undefined) {
+      setQuery(externalQuery);
+    }
+  }, [externalQuery]);
+
+  const handleQueryChange = (value: string) => {
+    setQuery(value);
+    onQueryChange?.(value);
+  };
 
   const filtered = useMemo(
     () => filterServices(query, activeCategory),
@@ -32,12 +51,12 @@ export function ServiceSearchFilter({ isBookmarked, onBookmark, onView }: Servic
   );
 
   const clearFilters = () => {
-    setQuery("");
+    handleQueryChange("");
     setActiveCategory("all");
   };
 
   return (
-    <section id="directory" className="px-4 py-16 sm:px-6 lg:px-8">
+    <section id="directory" className="section-padding">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -49,10 +68,10 @@ export function ServiceSearchFilter({ isBookmarked, onBookmark, onView }: Servic
             <SlidersHorizontal className="h-4 w-4" strokeWidth={1.75} />
             Search & Filter
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
+          <h2 className="section-title">
             Browse All Government Services
           </h2>
-          <p className="mt-3 text-slate-600 dark:text-slate-400">
+          <p className="mt-2 text-sm text-slate-600 sm:mt-3 sm:text-base dark:text-slate-400">
             Search by name, agency, or description. Filter by Identity, Marriage, Business, Tax, and more.
           </p>
         </motion.div>
@@ -66,7 +85,7 @@ export function ServiceSearchFilter({ isBookmarked, onBookmark, onView }: Servic
             <input
               type="search"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e) => handleQueryChange(e.target.value)}
               placeholder="Search services, categories, agencies..."
               className="w-full rounded-xl border border-slate-200 bg-white py-3.5 pl-12 pr-12 text-base text-slate-900 placeholder:text-slate-400 focus:border-bhutan-blue focus:outline-none focus:ring-2 focus:ring-bhutan-blue/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
               aria-label="Search all government services"
@@ -74,7 +93,7 @@ export function ServiceSearchFilter({ isBookmarked, onBookmark, onView }: Servic
             {query && (
               <button
                 type="button"
-                onClick={() => setQuery("")}
+                onClick={() => handleQueryChange("")}
                 className="absolute right-3 top-1/2 -translate-y-1/2 rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-800"
                 aria-label="Clear search"
               >
@@ -83,8 +102,8 @@ export function ServiceSearchFilter({ isBookmarked, onBookmark, onView }: Servic
             )}
           </div>
 
-          <div className="mt-4 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <div className="flex min-w-max gap-2" role="group" aria-label="Filter by category">
+          <div className="mt-4 overflow-x-auto pb-1 hide-scrollbar">
+            <div className="flex w-max min-w-full gap-2 sm:flex-wrap sm:w-auto" role="group" aria-label="Filter by category">
               {chips.map((chip) => (
                 <button
                   key={chip.value}
@@ -104,7 +123,7 @@ export function ServiceSearchFilter({ isBookmarked, onBookmark, onView }: Servic
           </div>
         </div>
 
-        <div className="mb-6 flex items-center justify-between gap-4">
+        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-slate-500 dark:text-slate-400">
             <span className="font-semibold text-slate-900 dark:text-white">{filtered.length}</span>{" "}
             {filtered.length === 1 ? "result" : "results"}
@@ -142,7 +161,7 @@ export function ServiceSearchFilter({ isBookmarked, onBookmark, onView }: Servic
             </button>
           </div>
         ) : (
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((service, i) => (
               <motion.div
                 key={service.id}

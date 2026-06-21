@@ -1,29 +1,28 @@
 "use client";
 
 import { useCallback, useRef, useState } from "react";
-import { AIAssistantSection } from "@/components/AIAssistantSection";
+// import { AIAssistantSection } from "@/components/AIAssistantSection";
 import { CategoriesSection } from "@/components/CategoriesSection";
-import { ChatModal } from "@/components/ChatModal";
-import { FloatingChatButton } from "@/components/FloatingChatButton";
+// import { ChatModal } from "@/components/ChatModal";
+// import { FloatingChatButton } from "@/components/FloatingChatButton";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
 import { MobileNav } from "@/components/MobileNav";
 import { MostUsedServices } from "@/components/MostUsedServices";
 import { PopularTrends, RecentlyViewed } from "@/components/RecentlyViewed";
-import { RecommendationEngine } from "@/components/RecommendationEngine";
+// import { RecommendationEngine } from "@/components/RecommendationEngine";
 import { ServiceGuideModal } from "@/components/ServiceGuideModal";
 import { ServiceSearchFilter } from "@/components/ServiceSearchFilter";
-import { SmartSearchSection } from "@/components/SmartSearchSection";
+// import { SmartSearchSection } from "@/components/SmartSearchSection";
 import { StatsDashboard } from "@/components/StatsDashboard";
 import { Top20MostUsed } from "@/components/Top20MostUsed";
 import { useBookmarks, useRecentlyViewed } from "@/hooks/useLocalStorage";
 import type { Service } from "@/types";
 
 export default function HomePage() {
-  const [chatOpen, setChatOpen] = useState(false);
-  const [chatQuery, setChatQuery] = useState<string | undefined>();
   const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [directoryQuery, setDirectoryQuery] = useState("");
   const searchRef = useRef<HTMLDivElement>(null);
 
   const { toggleBookmark, isBookmarked } = useBookmarks();
@@ -37,14 +36,9 @@ export default function HomePage() {
     [addRecent]
   );
 
-  const handleAskAI = useCallback((query: string) => {
-    setChatQuery(query);
-    setChatOpen(true);
-  }, []);
-
   const handleSearch = useCallback((query: string) => {
-    setChatQuery(query);
-    setChatOpen(true);
+    setDirectoryQuery(query);
+    document.getElementById("directory")?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
   const focusSearch = useCallback(() => {
@@ -57,11 +51,11 @@ export default function HomePage() {
 
   return (
     <>
-      <Header onSearchClick={focusSearch} onChatClick={() => setChatOpen(true)} />
+      <Header onSearchClick={focusSearch} />
 
-      <main ref={searchRef} className="pb-20 md:pb-0">
+      <main ref={searchRef} className="safe-bottom pb-[4.5rem] md:pb-0">
         <HeroSection onSearch={handleSearch} onSelectService={handleViewService} />
-        <AIAssistantSection />
+        {/* <AIAssistantSection /> */}
         <RecentlyViewed recentIds={recent} onView={handleViewService} />
         <Top20MostUsed onView={handleViewService} />
         <MostUsedServices
@@ -73,32 +67,33 @@ export default function HomePage() {
           isBookmarked={isBookmarked}
           onBookmark={toggleBookmark}
           onView={handleViewService}
+          externalQuery={directoryQuery}
+          onQueryChange={setDirectoryQuery}
         />
         <CategoriesSection onViewService={handleViewService} />
-        <RecommendationEngine onViewService={handleViewService} onAskAI={handleAskAI} />
-        <SmartSearchSection onSelectService={handleViewService} onSearch={handleSearch} />
+        {/* <RecommendationEngine onViewService={handleViewService} onAskAI={handleAskAI} /> */}
+        {/* <SmartSearchSection onSelectService={handleViewService} onSearch={handleSearch} /> */}
         <StatsDashboard />
         <PopularTrends onView={handleViewService} />
       </main>
 
       <Footer />
 
-      <FloatingChatButton onClick={() => setChatOpen(true)} />
-      <MobileNav onSearch={focusSearch} onChat={() => setChatOpen(true)} />
+      {/* <FloatingChatButton onClick={() => setChatOpen(true)} /> */}
+      <MobileNav onSearch={focusSearch} />
 
-      <ChatModal
+      {/* <ChatModal
         open={chatOpen}
         onClose={() => {
           setChatOpen(false);
           setChatQuery(undefined);
         }}
         initialQuery={chatQuery}
-      />
+      /> */}
 
       <ServiceGuideModal
         service={selectedService}
         onClose={() => setSelectedService(null)}
-        onAskAI={handleAskAI}
       />
     </>
   );

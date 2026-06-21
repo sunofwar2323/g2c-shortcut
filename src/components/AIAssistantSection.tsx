@@ -17,9 +17,9 @@ const CONVERSATION = [
 
 export function AIAssistantSection() {
   return (
-    <section id="assistant" className="px-4 py-16 sm:px-6 lg:px-8">
+    <section id="assistant" className="section-padding">
       <div className="mx-auto max-w-7xl">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
+        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -30,10 +30,10 @@ export function AIAssistantSection() {
               <Sparkles className="h-3.5 w-3.5" strokeWidth={1.75} />
               AI Assistant
             </div>
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
+            <h2 className="section-title">
               Meet Your Government AI Assistant
             </h2>
-            <p className="mt-4 text-lg text-slate-600 dark:text-slate-400">
+            <p className="mt-3 text-base text-slate-600 sm:mt-4 sm:text-lg dark:text-slate-400">
               Get clear, step-by-step guidance for any government service — without navigating complex portals alone.
             </p>
 
@@ -63,7 +63,7 @@ export function AIAssistantSection() {
             transition={{ duration: 0.6 }}
             className="glass-card overflow-hidden p-1"
           >
-            <div className="rounded-xl bg-gradient-to-br from-slate-50 to-white p-6 dark:from-slate-900 dark:to-slate-900/50">
+            <div className="rounded-xl bg-gradient-to-br from-slate-50 to-white p-4 sm:p-6 dark:from-slate-900 dark:to-slate-900/50">
               <div className="mb-6 flex items-center gap-3 border-b border-slate-200 pb-4 dark:border-slate-700">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-bhutan-blue to-bhutan-teal text-white">
                   <Bot className="h-5 w-5" strokeWidth={1.75} />
@@ -92,15 +92,15 @@ export function AIAssistantSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 + i * 0.2 }}
-                    className={`flex gap-3 ${msg.role === "user" ? "justify-end" : ""}`}
+                    className={`flex gap-2 sm:gap-3 ${msg.role === "user" ? "justify-end" : ""}`}
                   >
                     {msg.role === "ai" && (
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-bhutan-blue/10 text-bhutan-blue">
-                        <Bot className="h-4 w-4" strokeWidth={1.75} />
+                      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-bhutan-blue/10 text-bhutan-blue sm:h-8 sm:w-8">
+                        <Bot className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.75} />
                       </div>
                     )}
                     <div
-                      className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                      className={`max-w-[90%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed sm:max-w-[85%] sm:px-4 sm:py-3 ${
                         msg.role === "user"
                           ? "bg-bhutan-blue text-white"
                           : "bg-white text-slate-700 shadow-sm dark:bg-slate-800 dark:text-slate-200"
@@ -109,7 +109,7 @@ export function AIAssistantSection() {
                       <p className="whitespace-pre-line">{msg.text}</p>
                     </div>
                     {msg.role === "user" && (
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-200 text-slate-600 dark:bg-slate-700 dark:text-slate-300">
+                      <div className="hidden h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-200 text-slate-600 sm:flex dark:bg-slate-700 dark:text-slate-300">
                         <MessageSquare className="h-4 w-4" strokeWidth={1.75} />
                       </div>
                     )}

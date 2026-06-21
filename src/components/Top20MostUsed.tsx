@@ -14,7 +14,7 @@ export function Top20MostUsed({ onView }: Top20MostUsedProps) {
   const services = getTopServices();
 
   return (
-    <section id="top-20" className="bg-slate-50/50 px-4 py-16 dark:bg-slate-900/30 sm:px-6 lg:px-8">
+    <section id="top-20" className="section-padding bg-slate-50/50 dark:bg-slate-900/30">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -27,10 +27,10 @@ export function Top20MostUsed({ onView }: Top20MostUsedProps) {
               <TrendingUp className="h-4 w-4" strokeWidth={1.75} />
               Popular
             </div>
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
+            <h2 className="section-title">
               Top 20 Most Used Services
             </h2>
-            <p className="mt-3 text-slate-600 dark:text-slate-400">
+            <p className="mt-2 text-sm text-slate-600 sm:mt-3 sm:text-base dark:text-slate-400">
               The government services Bhutanese citizens access most frequently
             </p>
           </div>
@@ -39,7 +39,7 @@ export function Top20MostUsed({ onView }: Top20MostUsedProps) {
           </span>
         </motion.div>
 
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {services.map((service, i) => {
             const Icon = getServiceIcon(service);
             return (

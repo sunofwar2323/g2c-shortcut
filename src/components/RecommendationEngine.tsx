@@ -18,7 +18,7 @@ export function RecommendationEngine({ onViewService, onAskAI }: RecommendationE
   const recommendations = active ? getServicesByIds(active.serviceIds) : [];
 
   return (
-    <section className="bg-gradient-to-b from-bhutan-blue-light/30 to-transparent px-4 py-16 dark:from-bhutan-blue/5 sm:px-6 lg:px-8">
+    <section className="section-padding bg-gradient-to-b from-bhutan-blue-light/30 to-transparent dark:from-bhutan-blue/5">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -30,13 +30,13 @@ export function RecommendationEngine({ onViewService, onAskAI }: RecommendationE
             <Lightbulb className="h-3.5 w-3.5" strokeWidth={1.75} />
             Smart Recommendations
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
+          <h2 className="section-title">
             Not Sure What Service You Need?
           </h2>
-          <p className="mt-3 text-slate-600 dark:text-slate-400">Let AI help you find the right government services</p>
+          <p className="mt-2 text-sm text-slate-600 sm:mt-3 sm:text-base dark:text-slate-400">Let AI help you find the right government services</p>
         </motion.div>
 
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="hide-scrollbar -mx-4 flex gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0 sm:pb-0">
           {SCENARIO_PROMPTS.map((scenario) => (
             <button
               key={scenario.id}
@@ -45,7 +45,7 @@ export function RecommendationEngine({ onViewService, onAskAI }: RecommendationE
                 setActiveId(scenario.id);
                 onAskAI(scenario.query);
               }}
-              className={`rounded-full border px-5 py-2.5 text-sm font-medium transition-all ${
+              className={`shrink-0 rounded-full border px-4 py-2.5 text-sm font-medium transition-all sm:px-5 ${
                 activeId === scenario.id
                   ? "border-bhutan-blue bg-bhutan-blue text-white shadow-md shadow-bhutan-blue/25"
                   : "border-slate-200 bg-white text-slate-700 hover:border-bhutan-blue/30 hover:text-bhutan-blue dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
@@ -66,7 +66,7 @@ export function RecommendationEngine({ onViewService, onAskAI }: RecommendationE
               <Sparkles className="h-4 w-4" strokeWidth={1.75} />
               AI recommends these services for you
             </div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {recommendations.map((service) => {
                 const Icon = getServiceIcon(service);
                 return (

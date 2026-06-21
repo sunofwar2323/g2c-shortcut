@@ -2,26 +2,26 @@
 
 import { Building2, Moon, Search, Sun } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
-import { cn } from "@/lib/utils";
 
 interface HeaderProps {
   onSearchClick?: () => void;
-  onChatClick?: () => void;
 }
 
-export function Header({ onSearchClick, onChatClick }: HeaderProps) {
+export function Header({ onSearchClick }: HeaderProps) {
   const { theme, toggleTheme, mounted } = useTheme();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/80 backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-950/80">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#" className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-bhutan-blue to-bhutan-teal text-white shadow-md shadow-bhutan-blue/20">
-            <Building2 className="h-5 w-5" strokeWidth={1.75} />
+    <header className="safe-top sticky top-0 z-50 border-b border-slate-200/80 bg-white/80 backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-950/80">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-2 px-4 sm:h-16 sm:gap-4 sm:px-6 lg:px-8">
+        <a href="#" className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-bhutan-blue to-bhutan-teal text-white shadow-md shadow-bhutan-blue/20 sm:h-9 sm:w-9">
+            <Building2 className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={1.75} />
           </div>
-          <div className="hidden sm:block">
-            <p className="text-sm font-semibold text-slate-900 dark:text-white">Smarter G2C Station</p>
-            <p className="text-xs text-slate-500 dark:text-slate-400">Your AI Guide to Bhutan Government Services</p>
+          <div className="min-w-0">
+            <p className="truncate text-sm font-semibold text-slate-900 dark:text-white">Smarter G2C Station</p>
+            <p className="hidden truncate text-xs text-slate-500 sm:block dark:text-slate-400">
+              Your Guide to Bhutan Government Services
+            </p>
           </div>
         </a>
 
@@ -30,7 +30,6 @@ export function Header({ onSearchClick, onChatClick }: HeaderProps) {
             { href: "#search", label: "Search" },
             { href: "#top-20", label: "Top 20" },
             { href: "#directory", label: "All Services" },
-            { href: "#assistant", label: "AI Assistant" },
             { href: "#categories", label: "Categories" },
           ].map((item) => (
             <a
@@ -67,16 +66,6 @@ export function Header({ onSearchClick, onChatClick }: HeaderProps) {
               )}
             </button>
           )}
-
-          <button
-            type="button"
-            onClick={onChatClick}
-            className={cn(
-              "hidden rounded-xl bg-bhutan-blue px-4 py-2 text-sm font-medium text-white shadow-md shadow-bhutan-blue/25 transition-all hover:bg-bhutan-blue-dark sm:inline-flex"
-            )}
-          >
-            Ask AI
-          </button>
         </div>
       </div>
     </header>

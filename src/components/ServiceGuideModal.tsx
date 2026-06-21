@@ -1,16 +1,15 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Bot, Clock, ExternalLink, FileText, X } from "lucide-react";
+import { Clock, ExternalLink, FileText, X } from "lucide-react";
 import type { Service } from "@/types";
 
 interface ServiceGuideModalProps {
   service: Service | null;
   onClose: () => void;
-  onAskAI: (query: string) => void;
 }
 
-export function ServiceGuideModal({ service, onClose, onAskAI }: ServiceGuideModalProps) {
+export function ServiceGuideModal({ service, onClose }: ServiceGuideModalProps) {
   if (!service) return null;
 
   const steps = [
@@ -27,7 +26,7 @@ export function ServiceGuideModal({ service, onClose, onAskAI }: ServiceGuideMod
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-end justify-center bg-slate-900/50 p-4 backdrop-blur-sm sm:items-center"
+        className="fixed inset-0 z-50 flex items-end justify-center bg-slate-900/50 backdrop-blur-sm sm:items-center sm:p-4"
         onClick={onClose}
       >
         <motion.div
@@ -35,14 +34,14 @@ export function ServiceGuideModal({ service, onClose, onAskAI }: ServiceGuideMod
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 40 }}
           onClick={(e) => e.stopPropagation()}
-          className="max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl dark:bg-slate-900"
+          className="safe-bottom max-h-[92dvh] w-full max-w-lg overflow-y-auto rounded-t-2xl bg-white p-5 shadow-2xl sm:max-h-[85vh] sm:rounded-2xl sm:p-6 dark:bg-slate-900"
           role="dialog"
           aria-labelledby="service-guide-title"
         >
           <div className="mb-5 flex items-start justify-between">
             <div>
               <p className="text-xs font-medium uppercase tracking-wider text-bhutan-blue">{service.category}</p>
-              <h3 id="service-guide-title" className="mt-1 text-xl font-bold text-slate-900 dark:text-white">
+              <h3 id="service-guide-title" className="mt-1 text-lg font-bold text-slate-900 sm:text-xl dark:text-white">
                 {service.name}
               </h3>
               <p className="mt-1 text-sm text-slate-500">{service.agency}</p>
@@ -86,27 +85,19 @@ export function ServiceGuideModal({ service, onClose, onAskAI }: ServiceGuideMod
             </ol>
           </div>
 
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-6">
             <a
               href={service.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-bhutan-blue px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-bhutan-blue-dark"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-bhutan-blue px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-bhutan-blue-dark"
             >
               Open Official Portal
               <ExternalLink className="h-4 w-4" strokeWidth={1.75} />
             </a>
-            <button
-              type="button"
-              onClick={() => {
-                onAskAI(`How do I apply for ${service.name}?`);
-                onClose();
-              }}
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-700 transition-colors hover:border-bhutan-blue hover:text-bhutan-blue dark:border-slate-700 dark:text-slate-300"
-            >
-              Ask AI for Help
-              <Bot className="h-4 w-4" strokeWidth={1.75} />
-            </button>
+            {/* AI help button — disabled
+            <button type="button" onClick={() => onAskAI(...)}>Ask AI for Help</button>
+            */}
           </div>
         </motion.div>
       </motion.div>

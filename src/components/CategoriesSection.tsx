@@ -17,7 +17,7 @@ export function CategoriesSection({ onViewService }: CategoriesSectionProps) {
   const categoryServices = selectedCategory ? getServicesByCategory(selectedCategory.categoryKey) : [];
 
   return (
-    <section id="categories" className="px-4 py-16 sm:px-6 lg:px-8">
+    <section id="categories" className="section-padding">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -25,15 +25,13 @@ export function CategoriesSection({ onViewService }: CategoriesSectionProps) {
           viewport={{ once: true }}
           className="mb-10 text-center"
         >
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
-            AI-Powered Categories
-          </h2>
-          <p className="mt-3 text-slate-600 dark:text-slate-400">
-            Browse by category and get AI-generated explanations with service recommendations
+          <h2 className="section-title">Service Categories</h2>
+          <p className="mt-2 text-sm text-slate-600 sm:mt-3 sm:text-base dark:text-slate-400">
+            Browse by category and find the services you need
           </p>
         </motion.div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {CATEGORY_GRID.map((category, i) => {
             const Icon = getCategoryIcon(category.categoryKey);
             const count = getServicesByCategory(category.categoryKey).length;
@@ -67,7 +65,7 @@ export function CategoriesSection({ onViewService }: CategoriesSectionProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-end justify-center bg-slate-900/50 p-4 backdrop-blur-sm sm:items-center"
+              className="fixed inset-0 z-50 flex items-end justify-center bg-slate-900/50 backdrop-blur-sm sm:items-center sm:p-4"
               onClick={() => setSelected(null)}
             >
               <motion.div
@@ -75,7 +73,7 @@ export function CategoriesSection({ onViewService }: CategoriesSectionProps) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 40 }}
                 onClick={(e) => e.stopPropagation()}
-                className="max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl dark:bg-slate-900"
+                className="safe-bottom max-h-[88dvh] w-full max-w-lg overflow-y-auto rounded-t-2xl bg-white p-5 shadow-2xl sm:max-h-[80vh] sm:rounded-2xl sm:p-6 dark:bg-slate-900"
                 role="dialog"
                 aria-labelledby="category-dialog-title"
               >
@@ -85,7 +83,7 @@ export function CategoriesSection({ onViewService }: CategoriesSectionProps) {
                       {selectedCategory.name}
                     </h3>
                     <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-                      AI-recommended services in this category
+                      Services in this category
                     </p>
                   </div>
                   <button
